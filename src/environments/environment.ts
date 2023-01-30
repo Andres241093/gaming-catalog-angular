@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  twitch_client: {
+    id: '5lz39x7hq94a6qvg3uq71q4u72n996',
+    secret: 'l482f1x85ah68a5lw03gb29os10wqp'
+  }
 };
 
 /*

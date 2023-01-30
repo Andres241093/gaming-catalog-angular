@@ -1,0 +1,12 @@
+<mat-toolbar color="primary">
+    <button mat-icon-button (click)="drawer.toggle()" aria-label="Example icon-button with menu icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>Game Catalog</span>
+</mat-toolbar>
+<mat-drawer-container class="example-container">
+    <mat-drawer #drawer class="example-sidenav" mode="over">
+      <p>Example text</p>
+    </mat-drawer>
+    <ng-content></ng-content>
+</mat-drawer-container>
