@@ -1,0 +1,21 @@
+.game-list{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+h1 {
+  margin: 20px 20px 0px 10px;
+}
+
+@media screen and (max-width: 900px) {
+    .game-list {
+      justify-content: center;
+    }
+  }
+
+  @media screen and (max-width: 1000px) {
+    .game-list {
+      justify-content: center;
+    }
+  }

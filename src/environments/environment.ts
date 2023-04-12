@@ -4,10 +4,8 @@
 
 export const environment = {
   production: false,
-  twitch_client: {
-    id: '5lz39x7hq94a6qvg3uq71q4u72n996',
-    secret: 'l482f1x85ah68a5lw03gb29os10wqp'
-  }
+  api_key: '563e39c3df3c4ad38fdc68b8d4f29abd',
+  url: 'https://api.rawg.io/api'
 };
 
 /*
