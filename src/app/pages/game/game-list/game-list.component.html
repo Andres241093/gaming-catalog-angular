@@ -1,9 +1,15 @@
-<h1>All games</h1>
-<div class="game-list">
-    <div *ngFor="let game of games">
-        <app-game-card [game]="game"></app-game-card>
-    </div>
-<app-paginator 
-(paginatorData)="onChangePage($event)"
-[length]="length"></app-paginator>
+<div class="top-elements-container">
+    <h1>All games</h1>
+    <app-search-bar (searchValue)="searchValue($event)"></app-search-bar>
 </div>
+<app-loading [isLoading]="isLoading">
+    <div class="game-list">
+        <div *ngFor="let game of games">
+            <app-game-card [game]="game"></app-game-card>
+        </div>
+    <app-paginator 
+    *ngIf="length > 0"
+    (paginatorData)="onChangePage($event)"
+    [length]="length"></app-paginator>
+    </div>
+</app-loading>

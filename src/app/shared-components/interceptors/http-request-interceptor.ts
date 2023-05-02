@@ -10,7 +10,9 @@ export class HttpRequestInterceptor implements HttpInterceptor {
   constructor(private readonly loadingService: LoadingService){}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    this.loadingService.show();
+    if(!this.loadingService.noLoading){
+      this.loadingService.show();
+    }
     return next.handle(req)
     .pipe(map((evt: HttpEvent<any>) => {
       if (evt instanceof HttpResponse) {

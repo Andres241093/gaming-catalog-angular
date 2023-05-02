@@ -1,7 +1,9 @@
-<div *ngIf="isLoading">
+<div *ngIf="isLoading; else showContent">
     <mat-spinner class="center-screen"></mat-spinner>
     <div class="lock-screen">
         <ng-content></ng-content>
     </div>
 </div>
-<ng-content *ngIf="!isLoading"></ng-content>
+<ng-template #showContent>
+    <ng-content></ng-content>
+</ng-template>

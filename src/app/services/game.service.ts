@@ -23,4 +23,8 @@ export class GameService {
   getGameListPerPage(pageSize: number,pageIndex: number): Observable<any> {
     return this.http.get<any>(`${this.url}/games?key=${this.apiKey}&ordering=-metacritic&publishers=${this.publishers}&page_size=${pageSize}&page=${pageIndex}`);
   }
+
+  searchGame(searchValue: string): Observable<any> {
+    return this.http.get<any>(`${this.url}/games?key=${this.apiKey}&ordering=-metacritic&publishers=${this.publishers}&search=${searchValue}`);
+  }
 }

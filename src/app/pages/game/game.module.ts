@@ -5,6 +5,8 @@ import { GameRoutingModule } from './game-routing.module';
 import { GameListComponent } from './game-list/game-list.component';
 import { GameCardModule } from 'src/app/shared-components/game-card/game-card.module';
 import { PaginatorModule } from 'src/app/shared-components/paginator/paginator.module';
+import { SearchBarModule } from 'src/app/shared-components/search-bar/search-bar.module';
+import { LoadingModule } from 'src/app/shared-components/loading/loading.module';
 
 @NgModule({
   declarations: [GameListComponent],
@@ -12,7 +14,9 @@ import { PaginatorModule } from 'src/app/shared-components/paginator/paginator.m
     CommonModule,
     GameRoutingModule,
     GameCardModule,
-    PaginatorModule
+    PaginatorModule,
+    SearchBarModule,
+    LoadingModule
   ]
 })
 export class GameModule { }

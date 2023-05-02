@@ -6,6 +6,7 @@ import {Subject} from 'rxjs';
 })
 export class LoadingService {
   isLoading = new Subject<boolean>();
+  noLoading = false;
 
   show(): void {
     this.isLoading.next(true);
@@ -13,5 +14,9 @@ export class LoadingService {
 
   hide(): void {
     this.isLoading.next(false);
+  }
+
+  cancelLoading(value: boolean): void {
+    this.noLoading = value;
   }
 }

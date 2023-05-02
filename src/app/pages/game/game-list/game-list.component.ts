@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Game } from 'src/app/interfaces/game-interface';
 import { GameService } from 'src/app/services/game.service';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-game-list',
@@ -11,8 +12,9 @@ import { GameService } from 'src/app/services/game.service';
 export class GameListComponent implements OnInit {
   games: Game[] = [];
   length = 0;
+  isLoading = false;
 
-  constructor(private readonly gameService: GameService) { }
+  constructor(private readonly gameService: GameService, private readonly loadingService: LoadingService) { }
 
   ngOnInit(): void {
     this.getData();
@@ -40,5 +42,26 @@ export class GameListComponent implements OnInit {
         this.games = this.formatData(res['results']);
       }
     });
+  }
+
+  searchValue(value: string): void {
+    if(value){
+      this.triggerLoading(true);
+      this.gameService.searchGame(value)
+      .subscribe({
+        next: (res) => {
+          this.triggerLoading(false);
+          this.length = 0;
+          this.games = this.formatData(res['results']);
+        }
+      });
+    }else{
+      this.getData();
+    }
+  }
+
+  triggerLoading(value: boolean): void {
+    this.loadingService.cancelLoading(value);
+    this.isLoading = value;
   }
 }
