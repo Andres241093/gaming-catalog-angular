@@ -13,6 +13,7 @@ export class GameListComponent implements OnInit {
   games: Game[] = [];
   length = 0;
   isLoading = false;
+  disablePaginator = false;
   title = 'All games';
 
   constructor(private readonly gameService: GameService, private readonly loadingService: LoadingService) { }
@@ -57,11 +58,14 @@ export class GameListComponent implements OnInit {
         next: (res) => {
           this.changeTitle('Search results');
           this.triggerLoading(false);
+          this.disablePaginator = true;
           this.length = res.count;
           this.games = this.formatData(res['results']);
         }
       });
     }else{
+      this.disablePaginator = false;
+      this.triggerLoading(false);
       this.changeTitle('All games');
       this.getData();
     }

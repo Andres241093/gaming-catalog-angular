@@ -11,7 +11,7 @@
             <app-game-card [game]="game"></app-game-card>
         </div>
     <app-paginator 
-    *ngIf="length > 0"
+    *ngIf="!disablePaginator"
     (paginatorData)="onChangePage($event)"
     [length]="length"></app-paginator>
     </div>
