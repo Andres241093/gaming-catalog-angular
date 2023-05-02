@@ -4,6 +4,14 @@
     background-size: cover;
 }
 
+.card-title {
+  display: inline-block;
+  width: 220px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .card-image{
     height: 150px;
     width: calc(100% + 32px);
@@ -25,15 +33,20 @@
     .card-image{
         height: 200px;
       }
+      .card-title {
+        width: 39vw;
+      }
   }
 
   @media screen and (max-width: 900px) {
     .example-card {
-        width: 80vw;
+        width: 70vw;
         background-size: cover;
     }
-
     .card-image{
-        height: 300px;
+        height: 40vw;
+      }
+      .card-title {
+        width: 500px;
       }
   }

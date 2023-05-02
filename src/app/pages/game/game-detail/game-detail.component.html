@@ -1,0 +1,9 @@
+<div class="container">
+    <h1>{{gameDetails.name}}</h1>
+    <h2>Images</h2>
+    <div class="screenshot-list">
+        <div *ngFor="let screenshot of gameScreenshots.results">
+            <img class="image" [src]="screenshot.image" [alt]="screenshot.id">
+        </div>
+    </div>
+</div>

@@ -1,8 +1,11 @@
 <div class="top-elements-container">
-    <h1>All games</h1>
+    <h1>{{title}}</h1>
     <app-search-bar (searchValue)="searchValue($event)"></app-search-bar>
 </div>
 <app-loading [isLoading]="isLoading">
+    <div *ngIf="length === 0">
+        <app-no-results></app-no-results>
+    </div>
     <div class="game-list">
         <div *ngFor="let game of games">
             <app-game-card [game]="game"></app-game-card>

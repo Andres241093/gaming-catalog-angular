@@ -6,6 +6,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { LoadingModule } from '../loading/loading.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { LoadingModule } from '../loading/loading.module';
     MatButtonModule,
     MatIconModule,
     MatSidenavModule,
-    LoadingModule
+    LoadingModule,
+    RouterModule
   ],
   exports: [
     LayoutComponent

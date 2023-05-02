@@ -27,4 +27,12 @@ export class GameService {
   searchGame(searchValue: string): Observable<any> {
     return this.http.get<any>(`${this.url}/games?key=${this.apiKey}&ordering=-metacritic&publishers=${this.publishers}&search=${searchValue}`);
   }
+
+  getGameDetails(id: number): Observable<any> {
+    return this.http.get<any>(`${this.url}/games/${id}?key=${this.apiKey}`);
+  }
+
+  getGameScreenshots(id: number): Observable<any> {
+    return this.http.get<any>(`${this.url}/games/${id}/screenshots?key=${this.apiKey}`);
+  }
 }

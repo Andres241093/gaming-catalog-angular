@@ -13,6 +13,7 @@ export class GameListComponent implements OnInit {
   games: Game[] = [];
   length = 0;
   isLoading = false;
+  title = 'All games';
 
   constructor(private readonly gameService: GameService, private readonly loadingService: LoadingService) { }
 
@@ -35,6 +36,10 @@ export class GameListComponent implements OnInit {
     });
   }
 
+  changeTitle(newTitle: string): void {
+    this.title = newTitle;
+  }
+
   onChangePage(event: PageEvent){
     this.gameService.getGameListPerPage(event.pageSize,event.pageIndex + 1)
     .subscribe({
@@ -50,12 +55,14 @@ export class GameListComponent implements OnInit {
       this.gameService.searchGame(value)
       .subscribe({
         next: (res) => {
+          this.changeTitle('Search results');
           this.triggerLoading(false);
-          this.length = 0;
+          this.length = res.count;
           this.games = this.formatData(res['results']);
         }
       });
     }else{
+      this.changeTitle('All games');
       this.getData();
     }
   }

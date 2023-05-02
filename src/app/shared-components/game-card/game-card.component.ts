@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { Game } from 'src/app/interfaces/game-interface';
 
 @Component({
@@ -6,12 +7,12 @@ import { Game } from 'src/app/interfaces/game-interface';
   templateUrl: './game-card.component.html',
   styleUrls: ['./game-card.component.scss']
 })
-export class GameCardComponent implements OnInit {
+export class GameCardComponent {
   @Input() game: Game = {} as Game;
 
-  constructor() { }
+  constructor(private readonly route: Router){}
 
-  ngOnInit(): void {
+  showGameDetail(): void {
+    this.route.navigate(['/games',this.game.id]);
   }
-
 }
