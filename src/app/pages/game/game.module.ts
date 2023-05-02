@@ -4,14 +4,15 @@ import { CommonModule } from '@angular/common';
 import { GameRoutingModule } from './game-routing.module';
 import { GameListComponent } from './game-list/game-list.component';
 import { GameCardModule } from 'src/app/shared-components/game-card/game-card.module';
-
+import { PaginatorModule } from 'src/app/shared-components/paginator/paginator.module';
 
 @NgModule({
   declarations: [GameListComponent],
   imports: [
     CommonModule,
     GameRoutingModule,
-    GameCardModule
+    GameCardModule,
+    PaginatorModule
   ]
 })
 export class GameModule { }

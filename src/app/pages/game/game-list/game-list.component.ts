@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GameGenre, ParentPlatform, Platform } from 'src/app/interfaces/esrb-rating-interface';
+import { PageEvent } from '@angular/material/paginator';
 import { Game } from 'src/app/interfaces/game-interface';
 import { GameService } from 'src/app/services/game.service';
 
@@ -10,6 +10,7 @@ import { GameService } from 'src/app/services/game.service';
 })
 export class GameListComponent implements OnInit {
   games: Game[] = [];
+  length = 0;
 
   constructor(private readonly gameService: GameService) { }
 
@@ -20,8 +21,8 @@ export class GameListComponent implements OnInit {
   getData(): void {
     this.gameService.getGameList().subscribe({
       next: (res: any) => {
+        this.length = res.count;
         this.games = this.formatData(res['results']);
-        console.log(this.games)
       }
     });
   }
@@ -29,6 +30,15 @@ export class GameListComponent implements OnInit {
   formatData(games: Game[]): Game[] {
     return games.filter((game: Game)=>{
       return game.background_image;
+    });
+  }
+
+  onChangePage(event: PageEvent){
+    this.gameService.getGameListPerPage(event.pageSize,event.pageIndex + 1)
+    .subscribe({
+      next: (res: any) => {
+        this.games = this.formatData(res['results']);
+      }
     });
   }
 }
