@@ -16,7 +16,8 @@ export class GameListComponent implements OnInit {
   disablePaginator = false;
   title = 'All games';
 
-  constructor(private readonly gameService: GameService, private readonly loadingService: LoadingService) { }
+  constructor(private readonly gameService: GameService, 
+    private readonly loadingService: LoadingService) { }
 
   ngOnInit(): void {
     this.getData();
@@ -27,6 +28,7 @@ export class GameListComponent implements OnInit {
       next: (res: any) => {
         this.length = res.count;
         this.games = this.formatData(res['results']);
+        this.loadingService.hide();
       }
     });
   }
@@ -46,6 +48,7 @@ export class GameListComponent implements OnInit {
     .subscribe({
       next: (res: any) => {
         this.games = this.formatData(res['results']);
+        this.loadingService.hide();
       }
     });
   }
@@ -61,6 +64,7 @@ export class GameListComponent implements OnInit {
           this.disablePaginator = true;
           this.length = res.count;
           this.games = this.formatData(res['results']);
+          this.loadingService.hide();
         }
       });
     }else{
