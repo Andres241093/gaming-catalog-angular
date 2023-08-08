@@ -1,0 +1,51 @@
+.example-card {
+    width: 20vw;
+    margin: 20px 10px 0px 10px;
+    background-size: cover;
+}
+
+.card-title {
+  display: inline-block;
+  width: 19vw;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-image{
+    height: 150px;
+    width: 100%;
+    display: block;
+    overflow: hidden;
+  }
+
+.example-card:hover {
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+  @media screen and (max-width: 1250px) {
+    .example-card {
+        width: 40vw;
+        background-size: cover;
+    }
+    .card-image{
+        height: 200px;
+      }
+      .card-title {
+        width: 100vw;
+      }
+  }
+
+  @media screen and (max-width: 900px) {
+    .example-card {
+        width: 70vw;
+        background-size: cover;
+    }
+    .card-image{
+        height: 40vw;
+      }
+      .card-title {
+        width: 69vw;
+      }
+  }
