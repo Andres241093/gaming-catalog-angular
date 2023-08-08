@@ -9,6 +9,7 @@ import { SearchBarModule } from 'src/app/shared-components/search-bar/search-bar
 import { LoadingModule } from 'src/app/shared-components/loading/loading.module';
 import { GameDetailComponent } from './game-detail/game-detail.component';
 import { NoResultsModule } from 'src/app/shared-components/no-results/no-results.module';
+import { GalleryModule } from 'ng-gallery';
 
 @NgModule({
   declarations: [GameListComponent, GameDetailComponent],
@@ -19,7 +20,8 @@ import { NoResultsModule } from 'src/app/shared-components/no-results/no-results
     PaginatorModule,
     SearchBarModule,
     LoadingModule,
-    NoResultsModule
+    NoResultsModule,
+    GalleryModule
   ]
 })
 export class GameModule { }
