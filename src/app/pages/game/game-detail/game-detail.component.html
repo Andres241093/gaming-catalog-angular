@@ -12,7 +12,11 @@
                         [class]="platform.platform.name+'-logo'">
                 </div>
             </div>
-            <gallery class="gallery" *ngIf="gameImages.length > 0" [items]="gameImages"></gallery>
+            <gallery 
+            gallerize
+            class="gallery" 
+            *ngIf="gameImages.length > 0" 
+            [items]="gameImages"></gallery>
             <div *ngIf="gameDetails.description_raw" class="description">
                 <h1>Description</h1>
                 <div class="description" [innerHTML]="gameDetails.description_raw"></div>

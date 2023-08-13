@@ -11,6 +11,7 @@ import { GameDetailComponent } from './game-detail/game-detail.component';
 import { NoResultsModule } from 'src/app/shared-components/no-results/no-results.module';
 import { GalleryModule } from 'ng-gallery';
 import { MatCardModule } from '@angular/material/card';
+import { LightboxModule } from 'ng-gallery/lightbox';
 
 @NgModule({
   declarations: [GameListComponent, GameDetailComponent],
@@ -23,7 +24,8 @@ import { MatCardModule } from '@angular/material/card';
     LoadingModule,
     NoResultsModule,
     GalleryModule,
-    MatCardModule
+    MatCardModule,
+    LightboxModule
   ]
 })
 export class GameModule { }
