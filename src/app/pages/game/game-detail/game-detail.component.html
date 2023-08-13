@@ -1,12 +1,22 @@
-<div class="container">
-    <h1>{{gameDetails.name}}</h1>
-    <h2>Images</h2>
-    <div class="screenshot-list">
-<!--         <div *ngFor="let screenshot of gameScreenshots.results">
-            <img class="image" [src]="screenshot.image" [alt]="screenshot.id">
-        </div> -->
-        <gallery 
-        *ngIf="gameImages.length > 0"
-        [items]="gameImages"></gallery>
-    </div>
-</div>
+<app-loading>
+    <mat-card class="container">
+        <mat-card-header>
+            <mat-card-title>
+                {{gameDetails.name}}
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="platform-container">
+                <div *ngFor="let platform of gameDetails.platforms">
+                    <img class="platform" [src]="'/assets/'+platform.platform.name+'_logo.png'" alt="platform-logo"
+                        [class]="platform.platform.name+'-logo'">
+                </div>
+            </div>
+            <gallery class="gallery" *ngIf="gameImages.length > 0" [items]="gameImages"></gallery>
+            <div *ngIf="gameDetails.description_raw" class="description">
+                <h1>Description</h1>
+                <div class="description" [innerHTML]="gameDetails.description_raw"></div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</app-loading>

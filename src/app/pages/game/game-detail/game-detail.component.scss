@@ -1,5 +1,27 @@
 .container {
-    margin: 20px 20px 0px 10px;
+    margin: 20px 20px 20px 20px;
+}
+
+.platform-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.macOS-logo, .iOS-logo {
+    height: 40px;
+    width: 38px !important;
+    margin-bottom: 7px;
+}
+
+.platform {
+    width: 60px;
+    margin-top: 20px;
+}
+
+.description {
+    width: 100%;
+    margin-top: 20px;
 }
 
 .screenshot-list {
@@ -8,11 +30,16 @@
     flex-wrap: wrap;
 }
 
-.image{
+.gallery {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.image {
     height: 200px;
     width: calc(100% + 20px);
     margin-left: 10px;
     margin-top: 10px;
     display: block;
     overflow: hidden;
-  }
+}

@@ -6,10 +6,10 @@
 
 .card-title {
   display: inline-block;
-  width: 19vw;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  width: calc(250px - 25px);
 }
 
 .card-image{
@@ -24,28 +24,67 @@
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
+@media screen and (min-width: 1650px) {
+  .example-card {
+    width: 16vw;
+    background-size: cover;
+    height: 45vh;
+  }
+  .card-image{
+      height: 300px;
+    } 
+    .card-title {
+      width: 250px;
+    }  
+}
+
   @media screen and (max-width: 1250px) {
     .example-card {
-        width: 40vw;
-        background-size: cover;
+      width: 50vw;
+      background-size: cover;
+      height: auto;
     }
     .card-image{
-        height: 200px;
-      }
+        height: 300px;
+      } 
       .card-title {
-        width: 100vw;
-      }
+        width: auto;
+      }  
   }
 
   @media screen and (max-width: 900px) {
     .example-card {
-        width: 70vw;
+        width: 50vw;
         background-size: cover;
     }
     .card-image{
         height: 40vw;
       }
-      .card-title {
-        width: 69vw;
+  }
+
+  @media screen and (max-width: 829px) {
+    .example-card {
+      width: 85vw;
+      background-size: cover;
+    }
+    .card-image{
+        height: 40vw;
       }
+  }
+
+  @media screen and (max-width: 730px) {
+    .example-card {
+      width: 75vw;
+      background-size: cover;
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+    .example-card {
+      width: 70vw;
+      background-size: cover;
+    }
+    .card-title {
+      width: 60vw;
+    }
   }

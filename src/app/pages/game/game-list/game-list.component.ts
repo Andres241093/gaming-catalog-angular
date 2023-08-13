@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { Game } from 'src/app/interfaces/game-interface';
 import { GameService } from 'src/app/services/game.service';
 import { LoadingService } from 'src/app/services/loading.service';
@@ -9,12 +11,12 @@ import { LoadingService } from 'src/app/services/loading.service';
   templateUrl: './game-list.component.html',
   styleUrls: ['./game-list.component.scss']
 })
-export class GameListComponent implements OnInit {
+export class GameListComponent implements OnInit, OnDestroy {
   games: Game[] = [];
   length = 0;
-  isLoading = false;
   disablePaginator = false;
   title = 'All games';
+  destroyObs: Subject<boolean> = new Subject();
 
   constructor(private readonly gameService: GameService, 
     private readonly loadingService: LoadingService) { }
@@ -24,9 +26,12 @@ export class GameListComponent implements OnInit {
   }
 
   getData(): void {
-    this.gameService.getGameList().subscribe({
+    this.loadingService.show();
+    this.gameService.getGameList()
+    .pipe(takeUntil(this.destroyObs)) 
+    .subscribe({
       next: (res: any) => {
-        this.length = res.count;
+        this.length = res['results'].length;
         this.games = this.formatData(res['results']);
         this.loadingService.hide();
       }
@@ -45,6 +50,7 @@ export class GameListComponent implements OnInit {
 
   onChangePage(event: PageEvent){
     this.gameService.getGameListPerPage(event.pageSize,event.pageIndex + 1)
+    .pipe(takeUntil(this.destroyObs)) 
     .subscribe({
       next: (res: any) => {
         this.games = this.formatData(res['results']);
@@ -54,13 +60,13 @@ export class GameListComponent implements OnInit {
   }
 
   searchValue(value: string): void {
-    if(value){
-      this.triggerLoading(true);
+    console.log(value)
+    if(value.length > 0){
       this.gameService.searchGame(value)
+      .pipe(takeUntil(this.destroyObs)) 
       .subscribe({
         next: (res) => {
           this.changeTitle('Search results');
-          this.triggerLoading(false);
           this.disablePaginator = true;
           this.length = res.count;
           this.games = this.formatData(res['results']);
@@ -69,14 +75,12 @@ export class GameListComponent implements OnInit {
       });
     }else{
       this.disablePaginator = false;
-      this.triggerLoading(false);
       this.changeTitle('All games');
       this.getData();
     }
   }
 
-  triggerLoading(value: boolean): void {
-    this.loadingService.cancelLoading(value);
-    this.isLoading = value;
+  ngOnDestroy(): void {
+    this.destroyObs.next(true);
   }
 }

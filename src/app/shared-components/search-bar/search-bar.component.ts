@@ -17,8 +17,8 @@ export class SearchBarComponent implements OnInit {
     this.value.valueChanges
     .pipe(debounceTime(500))
     .subscribe({
-      next: (value) => {
-        if(value){
+      next: value => {
+        if(typeof value === 'string'){
           this.searchValue.emit(value)
         }
       }
