@@ -1,4 +1,4 @@
-<div *ngIf="isLoading | async; else showContent">
+<div *ngIf="isLoading else showContent">
     <mat-spinner class="center-screen"></mat-spinner>
     <div class="lock-screen">
         <ng-content></ng-content>

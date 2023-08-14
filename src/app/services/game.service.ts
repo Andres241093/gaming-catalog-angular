@@ -28,7 +28,7 @@ export class GameService {
   }
 
   searchGame(searchValue: string): Observable<any> {
-    return this.http.get<any>(`${this.url}/games?key=${this.apiKey}&ordering=-metacritic&publishers=${this.publishers}&search=${searchValue}`);
+    return this.http.get<any>(`${this.url}/games?key=${this.apiKey}&search=${searchValue}&ordering=name&publishers=${this.publishers}`);
   }
 
   getGameDetails(id: number): Observable<any> {
@@ -41,6 +41,7 @@ export class GameService {
 
   getVideos(id: number,name: string): Observable<VideoData> {
     const keyword = `${name} trailer videogame 1080p`;
-    return this.http.get<any>(`${this.youtubeUrl}/search?q=${keyword}&maxResults=10&key=${this.youtubeKey}`);
+    //return this.http.get<any>(`${this.youtubeUrl}/search?q=${keyword}&maxResults=10&key=${this.youtubeKey}`);
+    return this.http.get<any>(`${this.url}/${id}/movies?key=${this.apiKey}`);
   }
 }

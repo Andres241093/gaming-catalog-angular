@@ -18,6 +18,7 @@ export class GameListComponent implements OnInit, OnDestroy {
   disablePaginator = false;
   title = 'All games';
   destroyObs: Subject<boolean> = new Subject();
+  isLoading = false;
 
   constructor(private readonly gameService: GameService, 
     private readonly loadingService: LoadingService,
@@ -33,14 +34,14 @@ export class GameListComponent implements OnInit, OnDestroy {
   }
 
   getData(): void {
-    this.loadingService.show();
+    this.isLoading = true;
     this.gameService.getGameList()
     .pipe(takeUntil(this.destroyObs)) 
     .subscribe({
       next: (res: any) => {
         this.length = res.count;
         this.games = this.formatData(res['results']);
-        this.loadingService.hide();
+        this.isLoading = false;
       }
     });
   }
@@ -56,18 +57,20 @@ export class GameListComponent implements OnInit, OnDestroy {
   }
 
   onChangePage(event: PageEvent){
+    this.isLoading = true;
     this.gameService.getGameListPerPage(event.pageSize,event.pageIndex + 1)
     .pipe(takeUntil(this.destroyObs)) 
     .subscribe({
       next: (res: any) => {
         this.games = this.formatData(res['results']);
-        this.loadingService.hide();
+        this.isLoading = false;
       }
     });
   }
 
   searchValue(value: string): void {
     if(value.length > 0){
+      this.isLoading = true;
       this.gameService.searchGame(value)
       .pipe(
         takeUntil(this.destroyObs),
@@ -80,7 +83,7 @@ export class GameListComponent implements OnInit, OnDestroy {
           this.disablePaginator = true;
           this.length = res.count;
           this.games = this.formatData(res['results']);
-          this.loadingService.hide();
+          this.isLoading = false;
         }
       });
     }else{

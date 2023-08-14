@@ -21,6 +21,7 @@ export class GameDetailComponent implements OnInit, OnDestroy {
   gameScreenshots: Screenshot = {} as Screenshot;
   videoData: VideoData = {} as VideoData;
   destroyObs: Subject<boolean> = new Subject();
+  isLoading = false;
 
   constructor(private readonly activatedRoute: ActivatedRoute, 
     private readonly gameService: GameService,
@@ -31,6 +32,7 @@ export class GameDetailComponent implements OnInit, OnDestroy {
   }
 
   getData(): void {
+    this.isLoading = true;
     this.activatedRoute.params.subscribe({
       next: value => this.gameId = value['id']
     });
@@ -65,7 +67,7 @@ export class GameDetailComponent implements OnInit, OnDestroy {
       const image = new ImageItem({src: imageData.image, thumb: imageData.image})
       this.gameImages.push(image);
     });
-    this.loadingService.hide();
+    this.isLoading = false;
   }
 
   ngOnDestroy(): void {
