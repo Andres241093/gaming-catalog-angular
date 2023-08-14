@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
+import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { Game } from 'src/app/interfaces/game-interface';
 import { GameService } from 'src/app/services/game.service';
 import { LoadingService } from 'src/app/services/loading.service';
@@ -19,10 +20,16 @@ export class GameListComponent implements OnInit, OnDestroy {
   destroyObs: Subject<boolean> = new Subject();
 
   constructor(private readonly gameService: GameService, 
-    private readonly loadingService: LoadingService) { }
+    private readonly loadingService: LoadingService,
+    private readonly activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.getData();
+    const value = localStorage.getItem('search');
+    if(value){
+      this.searchValue(value)
+    }else{
+      this.getData();
+    }
   }
 
   getData(): void {
@@ -31,7 +38,7 @@ export class GameListComponent implements OnInit, OnDestroy {
     .pipe(takeUntil(this.destroyObs)) 
     .subscribe({
       next: (res: any) => {
-        this.length = res['results'].length;
+        this.length = res.count;
         this.games = this.formatData(res['results']);
         this.loadingService.hide();
       }
@@ -60,10 +67,13 @@ export class GameListComponent implements OnInit, OnDestroy {
   }
 
   searchValue(value: string): void {
-    console.log(value)
     if(value.length > 0){
       this.gameService.searchGame(value)
-      .pipe(takeUntil(this.destroyObs)) 
+      .pipe(
+        takeUntil(this.destroyObs),
+        debounceTime(500),
+        distinctUntilChanged()
+        ) 
       .subscribe({
         next: (res) => {
           this.changeTitle('Search results');

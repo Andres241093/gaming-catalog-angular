@@ -6,7 +6,21 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    flex-wrap: wrap;
 }
+
+.rating {
+    width: 35px;
+  }
+  
+  .metacritic-rating {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    img {
+      width: 35px;
+    }
+  }
 
 .macOS-logo, .iOS-logo {
     height: 40px;
@@ -19,9 +33,14 @@
     margin-top: 20px;
 }
 
-.description {
+.title {
     width: 100%;
     margin-top: 20px;
+}
+
+.genre {
+    display: flex;
+    gap: 10px;
 }
 
 .screenshot-list {

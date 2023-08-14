@@ -1,7 +1,11 @@
 <mat-form-field class="search-form">
     <mat-label>Search</mat-label>
-    <input matInput type="text" [formControl]="value">
-    <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="clearForm()">
+    <input 
+    (keyup.enter)="search()"
+    matInput type="text" [formControl]="value"
+    placeholder="Press Enter to search">
+    <button
+    *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="clearForm()">
       <mat-icon>close</mat-icon>
     </button>
 </mat-form-field>

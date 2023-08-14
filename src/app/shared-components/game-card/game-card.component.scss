@@ -4,6 +4,23 @@
     background-size: cover;
 }
 
+.content {
+  margin-top: 10px;
+}
+
+.rating {
+  width: 35px;
+}
+
+.metacritic-rating {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  img {
+    width: 35px;
+  }
+}
+
 .card-title {
   display: inline-block;
   white-space: nowrap;

@@ -1,18 +1,17 @@
 <mat-card (click)="showGameDetail()" class="example-card">
-    <mat-card-header>
-      <mat-card-title class="card-title">{{game.name}}</mat-card-title>
-      <mat-card-subtitle>{{game.rating}}/5</mat-card-subtitle>
-    </mat-card-header>
-    <img class="card-image" [src]="game.background_image" alt="Background image">
-    <mat-card-content>
-      <p>
-        Release: {{game.released || 'N/A'}}
-    </p>
+  <mat-card-header>
+    <mat-card-title class="card-title">{{game.name}}</mat-card-title>
+    <mat-card-subtitle>{{game.rating}}/5</mat-card-subtitle>
+  </mat-card-header>
+  <img class="card-image" [src]="game.background_image" alt="Background image">
+  <mat-card-content class="content">
     <p>
-        ESRB Rating: {{game.esrb_rating?.name || 'N/A'}}
+      Release: {{game.released || 'N/A'}}
     </p>
-    <p>
-        Metacritic: {{game.metacritic || 'N/A'}}
-    </p>
-    </mat-card-content>
-  </mat-card>
+    <div class="metacritic-rating">
+      <img *ngIf="game.esrb_rating" class="rating" [src]="'/assets/rating/'+game.esrb_rating.name+'.png'">
+      <img *ngIf="!game.esrb_rating" class="rating" [src]="'/assets/rating/Pending.png'">
+      <img src="/assets/metacritic_logo.png" alt="metacritic-logo"> {{game.metacritic || 'N/A'}}
+    </div>
+  </mat-card-content>
+</mat-card>
