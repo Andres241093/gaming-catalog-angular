@@ -1,11 +1,38 @@
 .example-card {
-    width: 20vw;
-    margin: 20px 10px 0px 10px;
-    background-size: cover;
+  width: 20vw;
+  margin: 20px 10px 0px 10px;
+  background-size: cover;
 }
 
 .content {
   margin-top: 10px;
+  position: absolute;
+  transition: all 1s ease-in-out;
+  visibility: hidden;
+  width: calc(100% - 32px);
+  border-radius: 0px 0px 5px 5px;
+  transform: translateY(0);
+  opacity: 0;
+}
+
+.example-card:hover {
+  .content {
+    position: absolute;
+    transition: all 1s ease-in-out;
+    transform: translateY(200%);
+    //top: 96%;
+    //bottom: 30%;
+    visibility: visible;
+    z-index: 2;
+    opacity: 1;
+    background-color: white;
+    width: calc(100% - 32px);
+    border-radius: 0px 0px 5px 5px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    p {
+      margin-top: 10px;
+    }
+  }
 }
 
 .rating {
@@ -16,6 +43,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
+
   img {
     width: 35px;
   }
@@ -29,16 +57,16 @@
   width: calc(250px - 25px);
 }
 
-.card-image{
-    height: 150px;
-    width: 100%;
-    display: block;
-    overflow: hidden;
-  }
+.card-image {
+  height: 150px;
+  width: 100%;
+  display: block;
+  overflow: hidden;
+}
 
 .example-card:hover {
-    cursor: pointer;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 @media screen and (min-width: 1650px) {
@@ -47,61 +75,69 @@
     background-size: cover;
     height: 45vh;
   }
-  .card-image{
-      height: 300px;
-    } 
-    .card-title {
-      width: 250px;
-    }  
+
+  .card-image {
+    height: 300px;
+  }
+
+  .card-title {
+    width: 250px;
+  }
 }
 
-  @media screen and (max-width: 1250px) {
-    .example-card {
-      width: 50vw;
-      background-size: cover;
-      height: auto;
-    }
-    .card-image{
-        height: 300px;
-      } 
-      .card-title {
-        width: auto;
-      }  
+@media screen and (max-width: 1250px) {
+  .example-card {
+    width: 50vw;
+    background-size: cover;
+    height: auto;
   }
 
-  @media screen and (max-width: 900px) {
-    .example-card {
-        width: 50vw;
-        background-size: cover;
-    }
-    .card-image{
-        height: 40vw;
-      }
+  .card-image {
+    height: 300px;
   }
 
-  @media screen and (max-width: 829px) {
-    .example-card {
-      width: 85vw;
-      background-size: cover;
-    }
-    .card-image{
-        height: 40vw;
-      }
+  .card-title {
+    width: auto;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .example-card {
+    width: 50vw;
+    background-size: cover;
   }
 
-  @media screen and (max-width: 730px) {
-    .example-card {
-      width: 75vw;
-      background-size: cover;
-    }
+  .card-image {
+    height: 40vw;
+  }
+}
+
+@media screen and (max-width: 829px) {
+  .example-card {
+    width: 85vw;
+    background-size: cover;
   }
 
-  @media screen and (max-width: 500px) {
-    .example-card {
-      width: 70vw;
-      background-size: cover;
-    }
-    .card-title {
-      width: 60vw;
-    }
+  .card-image {
+    height: 40vw;
   }
+}
+
+@media screen and (max-width: 730px) {
+  .example-card {
+    width: 75vw;
+    background-size: cover;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .example-card {
+    width: 70vw;
+    background-size: cover;
+  }
+
+
+  .card-title {
+    width: 60vw;
+  }
+}
