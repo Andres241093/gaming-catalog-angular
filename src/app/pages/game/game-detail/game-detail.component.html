@@ -1,9 +1,7 @@
 <app-loading [isLoading]="isLoading">
     <mat-card class="container">
         <mat-card-header>
-            <mat-card-title>
-                {{gameDetails.name}}
-            </mat-card-title>
+            <mat-card-title> {{gameDetails.name}}</mat-card-title>
         </mat-card-header>
         <mat-card-content>
             <div class="platform-container">
@@ -12,27 +10,57 @@
                         [class]="platform.platform.name+'-logo'">
                 </div>
             </div>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card *ngIf="YTitem" class="container video-card">
+        <mat-card-header>
+            <mat-card-title>
+                Trailer
+            </mat-card-title>
+        </mat-card-header>
+        <div class="video-container">
+            <iframe class="video" [src]="YTitem">
+            </iframe>
+        </div>
+    </mat-card>
+
+    <mat-card class="container">
+        <mat-card-header>
+            <mat-card-title>
+                Gallery
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
             <gallery gallerize class="gallery" *ngIf="gameImages.length > 0" [items]="gameImages"></gallery>
-            <div *ngIf="gameDetails.description_raw" class="title">
-                <h1>Description</h1>
-                <div class="description" [innerHTML]="gameDetails.description_raw"></div>
-            </div>
+        </mat-card-content>
+    </mat-card>
 
-            <div *ngIf="gameDetails.esrb_rating && gameDetails.metacritic" class="title">
-                <h1>Rating</h1>
-                <div class="metacritic-rating">
-                    <img *ngIf="gameDetails.esrb_rating" class="rating"
-                        [src]="'/assets/rating/'+gameDetails.esrb_rating.name+'.png'">
-                    <img *ngIf="!gameDetails.esrb_rating" class="rating" [src]="'/assets/rating/Pending.png'">
-                    <img src="/assets/metacritic_logo.png" alt="metacritic-logo"> {{gameDetails.metacritic || 'N/A'}}
+    <mat-card *ngIf="gameDetails.description_raw" class="container">
+        <mat-card-header>
+            <mat-card-title>
+                Description
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="description" [innerHTML]="gameDetails.description_raw"></div>
+            <div class="more-data">
+                <div *ngIf="gameDetails.esrb_rating && gameDetails.metacritic">
+                    <h1 class="title">Rating</h1>
+                    <div class="metacritic-rating">
+                        <img *ngIf="gameDetails.esrb_rating" class="rating"
+                            [src]="'/assets/rating/'+gameDetails.esrb_rating.name+'.png'">
+                        <img *ngIf="!gameDetails.esrb_rating" class="rating" [src]="'/assets/rating/Pending.png'">
+                        <img src="/assets/metacritic_logo.png" alt="metacritic-logo"> {{gameDetails.metacritic || 'N/A'}}
+                    </div>
                 </div>
-            </div>
-
-            <div *ngIf="gameDetails.genres.length > 0" class="title">
-                <h1>Genre</h1>
-                <div class="genre">
-                    <div *ngFor="let genre of gameDetails.genres">
-                        {{genre.name}}
+    
+                <div *ngIf="gameDetails.genres && gameDetails.genres.length > 0" class="title">
+                    <h1>Genre</h1>
+                    <div class="genre">
+                        <div *ngFor="let genre of gameDetails.genres">
+                            {{genre.name}}
+                        </div>
                     </div>
                 </div>
             </div>

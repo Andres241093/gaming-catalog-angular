@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { GalleryItem, ImageItem, VideoItem, YoutubeItem } from 'ng-gallery';
 import { BehaviorSubject, Subject, forkJoin, takeUntil } from 'rxjs';
@@ -12,7 +13,7 @@ import { LoadingService } from 'src/app/services/loading.service';
 @Component({
   selector: 'app-game-detail',
   templateUrl: './game-detail.component.html',
-  styleUrls: ['./game-detail.component.scss']
+  styleUrls: ['./game-detail.component.scss'],
 })
 export class GameDetailComponent implements OnInit, OnDestroy {
   gameId = 0;
@@ -22,10 +23,11 @@ export class GameDetailComponent implements OnInit, OnDestroy {
   videoData: VideoData = {} as VideoData;
   destroyObs: Subject<boolean> = new Subject();
   isLoading = false;
+  YTitem: SafeResourceUrl = '';
 
   constructor(private readonly activatedRoute: ActivatedRoute, 
     private readonly gameService: GameService,
-    private readonly loadingService: LoadingService) { }
+    public sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.getData();
@@ -55,8 +57,7 @@ export class GameDetailComponent implements OnInit, OnDestroy {
     .subscribe({
       next: video => {
         const videoId = video.items[0].id.videoId;
-        const videoThumb = `https://i3.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
-        this.gameImages.push(new YoutubeItem({src: videoId.toString(),thumb: videoThumb}));
+        this.YTitem = this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${videoId.toString()}`);
         this.setImages(this.gameScreenshots.results);
       },
       error: err => this.setImages(this.gameScreenshots.results)

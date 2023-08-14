@@ -6,6 +6,7 @@ import { PAGINATOR_INITIAL_VALUES } from '../const/paginator-initial-values';
 import { Screenshot } from '../interfaces/screenshot-interface';
 import { VideoData } from '../interfaces/video-data-interface';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -41,7 +42,6 @@ export class GameService {
 
   getVideos(id: number,name: string): Observable<VideoData> {
     const keyword = `${name} trailer videogame 1080p`;
-    //return this.http.get<any>(`${this.youtubeUrl}/search?q=${keyword}&maxResults=10&key=${this.youtubeKey}`);
-    return this.http.get<any>(`${this.url}/${id}/movies?key=${this.apiKey}`);
+    return this.http.get<any>(`${this.youtubeUrl}/search?q=${keyword}&maxResults=10&key=${this.youtubeKey}`);
   }
 }
