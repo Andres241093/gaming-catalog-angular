@@ -45,6 +45,12 @@
         <mat-card-content>
             <div class="description" [innerHTML]="gameDetails.description_raw"></div>
             <div class="more-data">
+                <div *ngIf="gameDetails.released" class="title">
+                    <h1>Release</h1>
+                    <div class="released">
+                        {{gameDetails.released}}
+                    </div>
+                </div>
                 <div *ngIf="gameDetails.esrb_rating && gameDetails.metacritic">
                     <h1 class="title">Rating</h1>
                     <div class="metacritic-rating">

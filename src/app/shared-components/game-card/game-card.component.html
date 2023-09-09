@@ -4,14 +4,4 @@
     <mat-card-subtitle>{{game.rating}}/5</mat-card-subtitle>
   </mat-card-header>
   <img class="card-image" [src]="game.background_image" alt="Background image">
-  <mat-card-content [hidden]="true" class="content">
-    <p>
-      Release: {{game.released || 'N/A'}}
-    </p>
-    <div class="metacritic-rating">
-      <img *ngIf="game.esrb_rating" class="rating" [src]="'/assets/rating/'+game.esrb_rating.name+'.png'">
-      <img *ngIf="!game.esrb_rating" class="rating" [src]="'/assets/rating/Pending.png'">
-      <img src="/assets/metacritic_logo.png" alt="metacritic-logo"> {{game.metacritic || 'N/A'}}
-    </div>
-  </mat-card-content>
 </mat-card>
