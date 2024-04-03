@@ -1,25 +1,23 @@
-<div class="container">
-  <div class="top-elements-container">
-    <h1>{{ title }}</h1>
-    <app-search-bar (searchValue)="searchValue($event)"></app-search-bar>
-  </div>
-  <app-loading [isLoading]="isLoading">
-    <div *ngIf="games.length > 0; else noResults">
-      <div class="game-list">
-        <div *ngFor="let game of games">
-          <app-game-card [game]="game"></app-game-card>
-        </div>
-      </div>
-      <div class="paginator">
-        <app-paginator
-          *ngIf="!disablePaginator"
-          (paginatorData)="onChangePage($event)"
-          [length]="length"
-        ></app-paginator>
+<div class="top-elements-container">
+  <h1>{{ title }}</h1>
+  <app-search-bar (searchValue)="searchValue($event)"></app-search-bar>
+</div>
+<app-loading [isLoading]="isLoading">
+  <div *ngIf="games.length > 0; else noResults">
+    <div class="game-list">
+      <div *ngFor="let game of games">
+        <app-game-card [game]="game"></app-game-card>
       </div>
     </div>
-    <ng-template #noResults>
-      <app-no-results></app-no-results>
-    </ng-template>
-  </app-loading>
-</div>
+    <div class="paginator">
+      <app-paginator
+        *ngIf="!disablePaginator"
+        (paginatorData)="onChangePage($event)"
+        [length]="length"
+      ></app-paginator>
+    </div>
+  </div>
+  <ng-template #noResults>
+    <app-no-results></app-no-results>
+  </ng-template>
+</app-loading>
