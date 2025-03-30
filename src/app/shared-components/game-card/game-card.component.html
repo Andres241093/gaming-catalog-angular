@@ -1,7 +1,14 @@
-<mat-card (click)="showGameDetail()" class="example-card">
-  <mat-card-header>
-    <mat-card-title class="card-title">{{game.name}}</mat-card-title>
-    <mat-card-subtitle>{{game.rating}}/5</mat-card-subtitle>
-  </mat-card-header>
-  <img class="card-image" [src]="game.background_image" alt="Background image">
+<mat-card (click)="showGameDetail()">
+  <img
+    class="game-img"
+    mat-card-image
+    [src]="imageSrc"
+    (mouseenter)="startImageRotation(game.short_screenshots)"
+    (mouseleave)="stopImageRotation(game.background_image)"
+    alt="{{ game.name }}"
+  />
+  <mat-card-content>
+    <h2 class="game-name">{{ game.name }}</h2>
+    <p>⭐ Metacritic: {{ game.rating }}</p>
+  </mat-card-content>
 </mat-card>

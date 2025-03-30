@@ -25,9 +25,11 @@ export class GameDetailComponent implements OnInit, OnDestroy {
   isLoading = false;
   YTitem: SafeResourceUrl = '';
 
-  constructor(private readonly activatedRoute: ActivatedRoute, 
+  constructor(
+    private readonly activatedRoute: ActivatedRoute,
     private readonly gameService: GameService,
-    public sanitizer: DomSanitizer) { }
+    public sanitizer: DomSanitizer
+  ) {}
 
   ngOnInit(): void {
     this.getData();
@@ -36,36 +38,44 @@ export class GameDetailComponent implements OnInit, OnDestroy {
   getData(): void {
     this.isLoading = true;
     this.activatedRoute.params.subscribe({
-      next: value => this.gameId = value['id']
+      next: (value) => (this.gameId = value['id']),
     });
 
-    forkJoin([this.gameService.getGameDetails(this.gameId), 
-      this.gameService.getGameScreenshots(this.gameId)])  
-    .pipe(takeUntil(this.destroyObs)) 
-    .subscribe({
-      next: ([details,screenshots]) => {
-        this.gameDetails = details;
-        this.gameScreenshots = screenshots;
-        this.getVideo(this.gameDetails.name);
-      }
-    });
+    forkJoin([
+      this.gameService.getGameDetails(this.gameId),
+      this.gameService.getGameScreenshots(this.gameId),
+    ])
+      .pipe(takeUntil(this.destroyObs))
+      .subscribe({
+        next: ([details, screenshots]) => {
+          this.gameDetails = details;
+          this.gameScreenshots = screenshots;
+          this.getVideo(this.gameDetails.name);
+        },
+      });
   }
 
   getVideo(name: string): void {
-    this.gameService.getVideos(this.gameId,name)
-    .pipe(takeUntil(this.destroyObs)) 
-    .subscribe({
-      next: video => {
-        const videoId = video.items[0].id.videoId;
-        this.YTitem = this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${videoId.toString()}`);
-        this.setImages(this.gameScreenshots.results);
-      },
-      error: err => this.setImages(this.gameScreenshots.results)
-    },);
+    this.gameService
+      .getVideos(this.gameId, name)
+      .pipe(takeUntil(this.destroyObs))
+      .subscribe({
+        next: (video) => {
+          const videoId = video.items[0].id.videoId;
+          this.YTitem = this.sanitizer.bypassSecurityTrustResourceUrl(
+            `https://www.youtube.com/embed/${videoId.toString()}`
+          );
+          this.setImages(this.gameScreenshots.results);
+        },
+        error: (err) => this.setImages(this.gameScreenshots.results),
+      });
   }
   setImages(results: ImageDetails[]): void {
     results.forEach((imageData: ImageDetails) => {
-      const image = new ImageItem({src: imageData.image, thumb: imageData.image})
+      const image = new ImageItem({
+        src: imageData.image,
+        thumb: imageData.image,
+      });
       this.gameImages.push(image);
     });
     this.isLoading = false;
