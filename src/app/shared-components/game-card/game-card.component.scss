@@ -1,24 +1,22 @@
-.example-card {
-  background-size: cover;
-}
-
-.card-title {
-  display: inline-block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: calc(290px - 25px);
-}
-
-.card-image {
-  height: 200px;
-  width: 100%;
-  display: block;
-  overflow: hidden;
-}
-
-.example-card:hover {
+mat-card {
+  width: 250px;
   cursor: pointer;
+  transition: transform 0.3s;
+}
+
+mat-card:hover {
+  transform: scale(1.05);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
+.game-name {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.game-img {
+  height: 200px;
+  object-fit: cover;
+  transition: opacity 0.3s ease-in-out;
+}

@@ -1,17 +1,12 @@
+.app-search-bar-container {
+  padding: 20px;
+  padding-bottom: 0px;
+}
+
 .game-list {
-  padding: 10px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  grid-gap: 30px;
-  align-items: stretch;
-}
-
-.top-elements-container {
-  margin: 20px 20px 0px 10px;
-}
-
-.paginator {
-  margin-top: 20px;
-  margin-left: 10px;
-  margin-right: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
 }
